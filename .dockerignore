@@ -1,6 +1,5 @@
-# Ignore existing Use-cases directory content
-Use-cases/*
-!Use-cases/.gitkeep
+# Ignore entire Use-cases directory
+Use-cases/
 
 # Python
 *.pyc
