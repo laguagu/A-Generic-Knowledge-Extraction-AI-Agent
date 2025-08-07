@@ -4,21 +4,28 @@ Unified Knowledge Extraction Agent UI
 Combined configuration and extraction interface.
 """
 
-import streamlit as st
-import json
-import os
 import glob
-from typing import Dict, List, Any, Optional
-import pandas as pd
-from datetime import datetime
-import time
+import json
 import logging
+import os
+import time
+from datetime import datetime
+from typing import Any, Dict, List, Optional
+
+import pandas as pd
+import streamlit as st
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+from claude_extractor import ClaudeExtractor
+from document_parser import DocumentParser
 
 # Import our modules
 from model_generator import ModelGenerator
-from document_parser import DocumentParser
 from openai_extractor import OpenAIExtractor
-from claude_extractor import ClaudeExtractor
+
 
 def get_api_config():
     """Get API configuration based on whether Azure endpoint is selected"""
@@ -950,7 +957,7 @@ def extraction_section():
                     try:
                         import tkinter as tk
                         from tkinter import filedialog
-                        
+
                         # Create a root window and hide it
                         root = tk.Tk()
                         root.withdraw()
@@ -1268,8 +1275,8 @@ def run_extraction():
 
 def _cleanup_temp_files():
     """Clean up temporary files created during document upload"""
-    import os
     import glob
+    import os
     
     try:
         # Clean up temp files from uploaded documents

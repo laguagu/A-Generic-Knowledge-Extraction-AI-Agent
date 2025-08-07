@@ -25,11 +25,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
-# Create necessary directories with correct permissions for OpenShift arbitrary user IDs
-# Only set permissions for new directories and files that need to be writable
-RUN mkdir -p /app/output /app/temp && \
-    chgrp -R 0 /app/output /app/temp && \
-    chmod -R g+rwX /app/output /app/temp
+# Ensure Use-cases is always writable (for saving models)
+RUN rm -rf /app/Use-cases && mkdir /app/Use-cases
+VOLUME ["/app/Use-cases"]
 
 # Expose port (Streamlit default is 8501)
 EXPOSE 8501
