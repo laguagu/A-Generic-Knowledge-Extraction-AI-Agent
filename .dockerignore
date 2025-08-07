@@ -1,0 +1,106 @@
+# CRITICAL: Environment variables with API keys and secrets
+.env
+.env.*
+!.env.example
+
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile*
+.dockerignore
+docker-compose*.yml
+
+# Documentation and README files
+README.md
+*.md
+docs/
+
+# Setup scripts
+setup.sh
+setup.bat
+
+# Test files
+test_*
+*_test.py
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+logs/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# Output directories (if you don't want to include generated outputs)
+output/
+results/
+*.xlsx
+*.csv
+
+# Images (uncomment if you don't need them in production)
+# images/
+# *.png
+# *.jpg
+# *.jpeg
+# *.gif
+
+# Large input files (uncomment if you don't need sample data)
+# input/
