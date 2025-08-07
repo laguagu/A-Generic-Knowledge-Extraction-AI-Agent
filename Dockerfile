@@ -13,8 +13,8 @@ LABEL name="knowledge-extraction-ai-agent" \
 # Only keep essential environment variable for containers
 ENV PYTHONUNBUFFERED=1
 
-# Set work directory
-WORKDIR /app
+# Set work directory (using default user's home which is writable)
+WORKDIR /opt/app-root/src
 
 # Copy requirements first for better Docker layer caching
 COPY requirements.txt .
@@ -25,16 +25,16 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
-# Ensure Use-cases is always writable (for saving models)
-RUN rm -rf /app/Use-cases && mkdir /app/Use-cases
-VOLUME ["/app/Use-cases"]
+# Create Use-cases directory in a location where we have write permissions
+# /opt/app-root/src is writable by default in UBI images
+RUN mkdir -p /opt/app-root/src/Use-cases && \
+    chmod 775 /opt/app-root/src/Use-cases
 
 # Expose port (Streamlit default is 8501)
 EXPOSE 8501
 
-# Use numeric USER ID for OpenShift compatibility (not username)
-# This allows OpenShift to run the container with arbitrary user IDs
-USER 1001
+# The UBI image already runs as non-root user (UID 1001)
+# No need to explicitly set USER
 
 # Command to run the application
 CMD ["streamlit", "run", "ui_app.py", "--server.port=8501", "--server.address=0.0.0.0", "--server.headless=true", "--server.fileWatcherType=none"]
